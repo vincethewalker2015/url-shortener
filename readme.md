@@ -12,12 +12,12 @@
   ``localhost:4567``
 
   ## To Create a shortened URL
-  * For example = makeitcheaper in the terminal
+  ##### For example = makeitcheaper in the terminal
   `` run curl localhost:4567 --data "url=makeitcheaper.com" -X POST ``
   * this will create a short code (In the terminal) - Copy it
   * Open a browser window and paste the URL
 
-  
+
 
   ### Steps taken to build this app:
   * In app.rb added a 'Hello World' message to check the message can be seen in the Browser
