@@ -3,8 +3,9 @@ require 'pstore'
 require 'base64'
 
 get '/:url' do
-  "The URL is #{params[:url]}"
+  ShortURL.read(params[:url])
 end
+
 get '/' do
   "Enter your URL using a curl POST request"
 end
@@ -26,8 +27,16 @@ class ShortURL
 
     store.transaction { |t| store[encoded] = original }
   end
+
+
+  def self.read(encoded)
+    store.transaction { store[encoded] }
+  end
+
+  def self.store 
+    @store ||= PStore.new("shortened_urls.db")
+  end
+
 end
-
-
 
 
