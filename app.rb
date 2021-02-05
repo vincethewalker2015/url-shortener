@@ -1,20 +1,23 @@
 require 'sinatra'
+require 'pstore'
+require 'base64'
 
-
-class MyApp < Sinatra::Base
-  # get '/' do
-  #   "Hello, Great new world!"
-  # end
-
-  get '/:url' do
-    "The URL is #{params[:url]}"
-  end
-  get '/' do
-    "Send a POST request to register a new URL."
-  end
-  post '/' do
-    "New URL added: #{params[:url]}\n"
-  end
-
+get '/:url' do
+  "The URL is #{params[:url]}"
 end
+get '/' do
+  "Enter your URL using a curl POST request"
+end
+post '/' do
+  # "New URL added: #{params[:url]}\n"
+  url = generate_short_url(params[:url])
+  "Your shortened URL is: #{url}\n"
+end
+
+def generate_short_url(original)
+ "localhost:4567/" + Base64.encode64(original)[0..6]
+  
+end
+
+
 
