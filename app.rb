@@ -3,7 +3,13 @@ require 'pstore'
 require 'base64'
 
 get '/:url' do
-  redirect "http://" + ShortURL.read(params[:url])
+  original = ShortURL.read(params[:url])
+
+  if original 
+    redirect "http://" + original
+  else
+    "Sorry No URL found"
+  end
 end
 
 get '/' do
