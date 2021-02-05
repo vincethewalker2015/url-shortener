@@ -2,6 +2,8 @@ require 'sinatra'
 require 'pstore'
 require 'base64'
 
+
+
 get '/:url' do
   original = ShortURL.read(params[:url])
 
@@ -15,6 +17,7 @@ end
 get '/' do
   "Enter your URL using a curl POST request"
 end
+
 post '/' do
   # "New URL added: #{params[:url]}\n"
   url = generate_short_url(params[:url])
