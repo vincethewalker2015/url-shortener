@@ -15,9 +15,19 @@ post '/' do
 end
 
 def generate_short_url(original)
+  ShortURL.save(Base64.encode64(original)[0..6], original)
+
  "localhost:4567/" + Base64.encode64(original)[0..6]
-  
 end
+
+class ShortURL
+  def self.save(encoded, original)
+    store = PStore.new("shortened_urls.db")
+
+    store.transaction { |t| store[encoded] = original }
+  end
+end
+
 
 
 
